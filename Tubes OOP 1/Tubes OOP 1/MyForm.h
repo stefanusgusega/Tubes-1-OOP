@@ -471,10 +471,6 @@ namespace TubesOOP1 {
 			// Your code goes here... :)
 		}
 
-		private: System::Void Button_Dot_Click(System::Object^ sender, System::EventArgs^ e) {
-			// Your code goes here... :)
-		}
-
 		// BUTTON UNTUK ANGKA
 
 		private: System::Void Button_00_Click(System::Object^ sender, System::EventArgs^ e) {
