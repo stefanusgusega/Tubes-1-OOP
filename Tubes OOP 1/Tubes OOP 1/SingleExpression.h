@@ -28,6 +28,9 @@ class SingleExpression : public Expression {
 			case ("sqrt") :
 				result = sqrt(this->xs);
 				break;
+			case ("-"):
+				result = this->xs * -1;
+				break;
 			default:
 				throw "Invalid operator";
 				break;
