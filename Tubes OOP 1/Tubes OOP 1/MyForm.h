@@ -60,6 +60,7 @@ namespace TubesOOP1 {
 	private: System::Windows::Forms::Button^ Button_MC;
 	private: System::Windows::Forms::Button^ Button_MR;
 	private: System::Windows::Forms::Button^ Button_Power;
+	private: System::Windows::Forms::Button^ Button_Ans;
 
 
 
@@ -107,6 +108,7 @@ namespace TubesOOP1 {
 			this->Button_MC = (gcnew System::Windows::Forms::Button());
 			this->Button_MR = (gcnew System::Windows::Forms::Button());
 			this->Button_Power = (gcnew System::Windows::Forms::Button());
+			this->Button_Ans = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// contextMenuStrip1
@@ -359,7 +361,7 @@ namespace TubesOOP1 {
 				static_cast<System::Byte>(0)));
 			this->Button_MC->Location = System::Drawing::Point(451, 151);
 			this->Button_MC->Name = L"Button_MC";
-			this->Button_MC->Size = System::Drawing::Size(72, 103);
+			this->Button_MC->Size = System::Drawing::Size(72, 59);
 			this->Button_MC->TabIndex = 22;
 			this->Button_MC->Text = L"MC";
 			this->Button_MC->UseVisualStyleBackColor = true;
@@ -369,9 +371,9 @@ namespace TubesOOP1 {
 			// 
 			this->Button_MR->Font = (gcnew System::Drawing::Font(L"Kozuka Mincho Pr6N H", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Button_MR->Location = System::Drawing::Point(451, 272);
+			this->Button_MR->Location = System::Drawing::Point(451, 233);
 			this->Button_MR->Name = L"Button_MR";
-			this->Button_MR->Size = System::Drawing::Size(72, 97);
+			this->Button_MR->Size = System::Drawing::Size(72, 59);
 			this->Button_MR->TabIndex = 23;
 			this->Button_MR->Text = L"MR";
 			this->Button_MR->UseVisualStyleBackColor = true;
@@ -389,12 +391,25 @@ namespace TubesOOP1 {
 			this->Button_Power->UseVisualStyleBackColor = true;
 			this->Button_Power->Click += gcnew System::EventHandler(this, &MyForm::Button_Power_Click);
 			// 
+			// Button_Ans
+			// 
+			this->Button_Ans->Font = (gcnew System::Drawing::Font(L"Kozuka Mincho Pr6N H", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->Button_Ans->Location = System::Drawing::Point(451, 310);
+			this->Button_Ans->Name = L"Button_Ans";
+			this->Button_Ans->Size = System::Drawing::Size(72, 59);
+			this->Button_Ans->TabIndex = 25;
+			this->Button_Ans->Text = L"ANS";
+			this->Button_Ans->UseVisualStyleBackColor = true;
+			this->Button_Ans->Click += gcnew System::EventHandler(this, &MyForm::Button_Ans_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoScroll = true;
 			this->ClientSize = System::Drawing::Size(540, 453);
+			this->Controls->Add(this->Button_Ans);
 			this->Controls->Add(this->Button_Power);
 			this->Controls->Add(this->Button_MR);
 			this->Controls->Add(this->Button_MC);
@@ -445,6 +460,10 @@ namespace TubesOOP1 {
 			// Your code goes here... :)
 		}
 
+		private: System::Void Button_Ans_Click(System::Object^ sender, System::EventArgs^ e) {
+			// Your code goes here... :)
+		}
+
 		// BUTTON UNTUK OPERASI ARITMATIKA
 
 		private: System::Void Button_Plus_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -468,6 +487,10 @@ namespace TubesOOP1 {
 		}
 
 		private: System::Void Button_Power_Click(System::Object^ sender, System::EventArgs^ e) {
+			// Your code goes here... :)
+		}
+
+		private: System::Void Button_Dot_Click(System::Object^ sender, System::EventArgs^ e) {
 			// Your code goes here... :)
 		}
 
@@ -517,14 +540,10 @@ namespace TubesOOP1 {
 			// Your code goes here... :)
 		}
 
-		private: System::Void Button_Dot_Click(System::Object^ sender, System::EventArgs^ e) {
-			// Your code goes here... :)
-		}
-
 		// UNTUK LAYAR
 
 		private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 			// do nothing
 		}
-	};
+};
 }
