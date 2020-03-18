@@ -1,4 +1,9 @@
 #pragma once
+
+#include <iostream>
+
+using namespace std;
+
 template<class T>
 class Expression {
 	protected:
@@ -9,14 +14,16 @@ class Expression {
 			this->x = x;
 		}
 
-		T getX(T x) const {
+		T getX() const {
 			return this->x;
 		}
 
-		void setX() {
+		void setX(T x) {
 			this->x = x;
 		}
 
-		virtual T solve(string op) = 0;
+		T solve(string op) {
+			return this->x;
+		}
 
 };
