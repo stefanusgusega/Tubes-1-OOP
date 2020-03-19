@@ -22,14 +22,14 @@ class SingleExpression : public Expression {
 		this->xs = xs;
 	}
 
-	T solve(string op) {
-		T result;
+	Expression<T> solve(string op) {
+		Expression<T> result;
 		switch (op) {
 			case ("sqrt") :
-				result = sqrt(this->xs);
+				result = this->xs.akar();
 				break;
 			case ("-"):
-				result = this->xs * -1;
+				result = this->xs.negatif();
 				break;
 			default:
 				throw "Invalid operator";

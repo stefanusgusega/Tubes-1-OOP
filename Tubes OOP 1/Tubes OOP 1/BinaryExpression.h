@@ -6,37 +6,36 @@
 
 using namespace std;
 
-template<class T>
-class BinaryExpression : public Expression {
+template<class T, class U>
+class BinaryExpression : public Expression<T> {
 	protected:
-		Expression x1;
-		Expression x2;
+		Expression<T> x1;
+		Expression<U> x2;
 
 	public:
-
-		BinaryExpression(Expression* x1, Expression* x2) {
-			this->x1 = x1;
-			this->x2 = x2;
+		BinaryExpression(Expression<T>* x1, Expression<U>* x2) : Expression<T>(&x1.getX(x1)), Expression<U>(&x2.getX(x2)) {
+			this->x1 = &x1;
+			this->x2 = &x2;
 		}
 
-		Expression* getX1() const {
+		Expression<T>* getX1() const {
 			return this->x1;
 		}
 
-		Expression* getX2() const {
+		Expression<U>* getX2() const {
 			return this->x2;
 		}
 
-		void setX1(Expression* x1) {
+		void setX1(Expression<T>* x1) {
 			this->x1 = x1;
 		}
 
-		void setX2(Expression* x2) {
+		void setX2(Expression<U>* x2) {
 			this->x2 = x2;
 		}
 
-		T solve(string op) {
-			T result;
+		Expression<T> solve(string op) {
+			Expression<T> result;
 			switch (op) {
 				case ("+"):
 					result = this->x1 + this->x2;
@@ -56,7 +55,7 @@ class BinaryExpression : public Expression {
 					}
 					break;
 				case ("^"):
-					result = pow(this->x1, this->x2);
+					result = this->x1^this->x2;
 					break;
 				default:
 					throw "Invalid operator";
