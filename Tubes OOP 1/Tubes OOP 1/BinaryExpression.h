@@ -1,65 +1,71 @@
 #pragma once
 
 #include "Expression.h"
-#include <iostream>
-#include <cmath>
-
-using namespace std;
 
 template<class T, class U>
 class BinaryExpression : public Expression<T> {
 	protected:
-		Expression<T> x1;
-		Expression<U> x2;
+		Expression<T>* x1;
+		Expression<U>* x2;
 
 	public:
-		BinaryExpression(Expression<T>* x1, Expression<U>* x2) : Expression<T>(&x1.getX(x1)), Expression<U>(&x2.getX(x2)) {
-			this->x1 = &x1;
-			this->x2 = &x2;
-		}
-
-		Expression<T>* getX1() const {
-			return this->x1;
-		}
-
-		Expression<U>* getX2() const {
-			return this->x2;
-		}
-
-		void setX1(Expression<T>* x1) {
+		BinaryExpression(Expression<T>* x1, Expression<U>* x2) {
 			this->x1 = x1;
-		}
-
-		void setX2(Expression<U>* x2) {
 			this->x2 = x2;
 		}
 
-		Expression<T> solve(string op) {
-			Expression<T> result;
-			switch (op) {
-				case ("+"):
-					result = this->x1 + this->x2;
-					break;
-				case ("-"):
-					result = this->x1 - this->x2;
-					break;
-				case ("x"):
-					result = this->x1 * this->x2;
-					break;
-				case ("/"):
-					if (this->x2 != 0) {
-						result = this->x1 / this->x2;
-					}
-					else {
-						throw -999; // GANTI DENGAN EXCEPTION
-					}
-					break;
-				case ("^"):
-					result = this->x1^this->x2;
-					break;
-				default:
-					throw "Invalid operator";
+		virtual T solve() = 0;
+};
+
+template<class T, class U>
+class AddExpression : public BinaryExpression<T, U> {
+	public:
+		AddExpression(Expression<T>* x1, Expression<U>* x2) : BinaryExpression<T, U>(x1, x2) {
+			// do nothing
+		}
+
+		T solve() {
+			return this->x1->solve() + this->x2->solve();
+		}
+};
+
+template<class T, class U>
+class SubstractExpression : public BinaryExpression<T, U> {
+	public:
+		SubstractExpression(Expression<T>* x1, Expression<U>* x2) : BinaryExpression<T, U>(x1, x2) {
+			// do nothing
+		}
+
+		T solve() {
+			return this->x1->solve() - this->x2->solve();
+		}
+};
+
+template<class T, class U>
+class MultiplyExpression : public BinaryExpression<T, U> {
+	public:
+		MultiplyExpression(Expression<T>* x1, Expression<U>* x2) : BinaryExpression<T, U>(x1, x2) {
+			// do nothing
+		}
+
+		T solve() {
+			return this->x1->solve() * this->x2->solve();
+		}
+};
+
+template<class T, class U>
+class DivideExpression : public BinaryExpression<T, U> {
+	public:
+		DivideExpression(Expression<T>* x1, Expression<U>* x2) : BinaryExpression<T, U>(x1, x2) {
+			// do nothing
+		}
+
+		T solve() {
+			if (this->x2->solve() == 0) {
+				throw "Something"; // Ganti dengan Exception
 			}
-			return result;
+			else {
+				return this->x1->solve() / this->x2->solve();
+			}
 		}
 };
