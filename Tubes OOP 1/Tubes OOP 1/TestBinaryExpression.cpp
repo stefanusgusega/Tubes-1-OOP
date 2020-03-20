@@ -5,6 +5,8 @@
 int main() {
     AddExpression<float, int>* ae = new AddExpression<float, int>(new TerminalExpression<float>(3.4), new TerminalExpression<int>(3));
     cout << ae->solve() << endl;
+    ae->BinaryExpression::setX1(new TerminalExpression<float>(3.5));
+    cout << ae->solve() << endl;
     SubstractExpression<float, int>* se = new SubstractExpression<float, int>(new TerminalExpression<float>(7.4), new TerminalExpression<int>(3));
     cout << se->solve() << endl;
     MultiplyExpression<float, int>* me = new MultiplyExpression<float, int>(new TerminalExpression<float>(3.2), new TerminalExpression<int>(3));

@@ -14,6 +14,14 @@ class BinaryExpression : public Expression<T> {
 			this->x2 = x2;
 		}
 
+		void setX1(Expression<T>* x1) {
+			this->x1 = x1;
+		}
+
+		void setX2(Expression<T>* x2) {
+			this->x2 = x2;
+		}
+
 		virtual T solve() = 0;
 };
 

@@ -12,6 +12,10 @@ class UnaryExpression : public Expression<T> {
 			this->x = x;
 		}
 
+        void setX(Expression<T>* x) {
+            this->x = x;
+        }
+
 		virtual T solve() = 0;
 };
 
