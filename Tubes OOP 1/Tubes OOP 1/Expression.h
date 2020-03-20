@@ -22,6 +22,10 @@ class TerminalExpression : public Expression<T> {
 			this->x = x;
 		}
 
+		void setXTer(T x) {
+			this->x = x;
+		}
+
 		T solve() {
 			return this->x;
 		}
