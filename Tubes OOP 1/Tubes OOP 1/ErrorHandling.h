@@ -44,9 +44,16 @@ class DoubleNegativeError : public BaseError {
         }
 };
 
-class EmptyQueuePop : public BaseError {
+class EmptyQueuePopError : public BaseError {
     public:
-        EmptyQueuePop() : BaseError() {
+        EmptyQueuePopError() : BaseError() {
             this->message = "ERROR : There is no element in the queue";
+        }
+};
+
+class BlankExpressionError : public BaseError {
+    public:
+        BlankExpressionError() : BaseError() {
+            this->message = "ERROR : There is no Expression to count";
         }
 };

@@ -22,13 +22,18 @@ int main() {
     cout << dpe->getMessage() << endl;
     DoubleNegativeError* dne = new DoubleNegativeError();
     cout << dne->getMessage() << endl;
-    EmptyQueuePop* eqp = new EmptyQueuePop();
+    EmptyQueuePopError* eqp = new EmptyQueuePopError();
     cout << eqp->getMessage() << endl;
+    BlankExpressionError* bee = new BlankExpressionError();
+    cout << bee->getMessage() << endl;
     try {
         tryError();
     }
     catch (BaseError* err) {
         cout << err->getMessage() << endl;
+    }
+    catch (int x) {
+        cout << "Impossible..." << endl;
     }
     return 0;
 }
