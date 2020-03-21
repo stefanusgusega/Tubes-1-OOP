@@ -13,8 +13,8 @@ int main() {
     try {
         cout << err->solve() << endl;
     }
-    catch (const char* err){
-        cout << "Akar bilangan negatif tidak diperbolehkan" << endl;
+    catch (BaseError* err){
+        cout << err->getMessage() << endl;
     }
     return 0;
 }

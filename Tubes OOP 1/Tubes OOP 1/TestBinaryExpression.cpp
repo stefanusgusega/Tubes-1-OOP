@@ -17,8 +17,8 @@ int main() {
     try {
         cout << eh->solve() << endl;
     }
-    catch (const char* err) {
-        cout << "Pembagian dengan nol tidak diperbolehkan" << endl;
+    catch (BaseError* err) {
+        cout << err->getMessage() << endl;
     }
     return 0;
 }
