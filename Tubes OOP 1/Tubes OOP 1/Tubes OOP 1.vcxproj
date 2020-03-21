@@ -118,17 +118,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Evaluator.cpp" />
+    <ClCompile Include="EvaluatorExp.cpp" />
     <ClCompile Include="MyForm.cpp" />
+    <ClCompile Include="TestBinaryExpression.cpp" />
+    <ClCompile Include="TestErrorHandling.cpp" />
+    <ClCompile Include="TestEvaluatorclass.cpp" />
+    <ClCompile Include="TestHistory.cpp" />
+    <ClCompile Include="TestUnaryExpression.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ErrorHandling.h" />
+    <ClInclude Include="Evaluator.hpp" />
+    <ClInclude Include="Expression.h" />
+    <ClInclude Include="BinaryExpression.h" />
+    <ClInclude Include="History.h" />
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="UnaryExpression.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MyForm.resx">
       <DependentUpon>MyForm.h</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Tubes OOP 1.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
