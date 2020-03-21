@@ -4,9 +4,9 @@ using namespace std;
 
 
 
-int main(){
-    Evaluator<int,int> Ev;
-    string exp = "2+3*4+(8+7)*6-3";
+int main(int argc, char** args){
+    Evaluator<double,double> Ev;
+    string exp = args[1];
     float S = Ev.solve(exp);
     cout << S << endl;
 }

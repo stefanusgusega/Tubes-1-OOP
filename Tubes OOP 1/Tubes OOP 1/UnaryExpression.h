@@ -47,3 +47,54 @@ class SquareRootExpression : public UnaryExpression<T> {
 			}
         }
 };
+
+template<class T>
+class SineExpression : public UnaryExpression<T> {
+    public:
+        SineExpression(Expression<T>* x) : UnaryExpression<T>(x) {
+            // do nothing
+        }
+
+        T solve() {
+			// if (this->x->solve() > 0) {
+				return sin(this->x->solve());
+			// }
+            // else {
+			// 	throw "Imaginary Number";
+			// }
+        }
+};
+
+template<class T>
+class CosineExpression : public UnaryExpression<T> {
+    public:
+        CosineExpression(Expression<T>* x) : UnaryExpression<T>(x) {
+            // do nothing
+        }
+
+        T solve() {
+			// if (this->x->solve() > 0) {
+				return cos(this->x->solve());
+			// }
+            // else {
+			// 	throw "Imaginary Number";
+			// }
+        }
+};
+
+template<class T>
+class TangentExpression : public UnaryExpression<T> {
+    public:
+        TangentExpression(Expression<T>* x) : UnaryExpression<T>(x) {
+            // do nothing
+        }
+
+        T solve() {
+			// if (this->x->solve() > 0) {
+				return tan(this->x->solve());
+			// }
+            // else {
+			// 	throw "Imaginary Number";
+			// }
+        }
+};
