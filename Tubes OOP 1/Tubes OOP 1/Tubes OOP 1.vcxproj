@@ -80,7 +80,8 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies />
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>main</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -118,16 +119,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Evaluator.cpp" />
-    <ClCompile Include="EvaluatorExp.cpp" />
-    <ClCompile Include="MyForm.cpp" />
-    <ClCompile Include="TestBinaryExpression.cpp" />
-    <ClCompile Include="TestErrorHandling.cpp" />
-    <ClCompile Include="TestEvaluatorclass.cpp" />
-    <ClCompile Include="TestHistory.cpp" />
-    <ClCompile Include="TestUnaryExpression.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="ErrorHandling.h" />
     <ClInclude Include="Evaluator.hpp" />
     <ClInclude Include="Expression.h" />
@@ -146,6 +137,9 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Tubes OOP 1.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MyForm.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

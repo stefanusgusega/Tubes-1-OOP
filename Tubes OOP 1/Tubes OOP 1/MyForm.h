@@ -6,8 +6,12 @@
 #include "Evaluator.hpp"
 #include "History.h"
 #include <msclr/marshal_cppstd.h>
+#include <sstream>
 
-double Ans;
+double Ans = 0;
+bool flag = false; // Flag untuk mengecek apakah tombol = ditekan
+bool flagmr = false; // Flag untuk mengecek apakah tombol mr ditekan
+string ekspresi;
 History<double>* Hist = new History<double>();
 
 namespace TubesOOP1 {
@@ -57,7 +61,8 @@ namespace TubesOOP1 {
 	private: System::Windows::Forms::Button^ Button_2;
 	private: System::Windows::Forms::Button^ Button_3;
 	private: System::Windows::Forms::Button^ Button_0;
-	private: System::Windows::Forms::Button^ Button_00;
+	private: System::Windows::Forms::Button^ Button_Tan;
+
 	private: System::Windows::Forms::Button^ Button_Dot;
 	private: System::Windows::Forms::Button^ Button_Plus;
 	private: System::Windows::Forms::Button^ Button_Minus;
@@ -71,6 +76,8 @@ namespace TubesOOP1 {
 	private: System::Windows::Forms::Button^ Button_MR;
 
 	private: System::Windows::Forms::Button^ Button_Ans;
+	private: System::Windows::Forms::Button^ Button_Sin;
+	private: System::Windows::Forms::Button^ Button_Cos;
 
 
 
@@ -105,7 +112,7 @@ namespace TubesOOP1 {
 			this->Button_2 = (gcnew System::Windows::Forms::Button());
 			this->Button_3 = (gcnew System::Windows::Forms::Button());
 			this->Button_0 = (gcnew System::Windows::Forms::Button());
-			this->Button_00 = (gcnew System::Windows::Forms::Button());
+			this->Button_Tan = (gcnew System::Windows::Forms::Button());
 			this->Button_Dot = (gcnew System::Windows::Forms::Button());
 			this->Button_Plus = (gcnew System::Windows::Forms::Button());
 			this->Button_Minus = (gcnew System::Windows::Forms::Button());
@@ -118,6 +125,8 @@ namespace TubesOOP1 {
 			this->Button_MC = (gcnew System::Windows::Forms::Button());
 			this->Button_MR = (gcnew System::Windows::Forms::Button());
 			this->Button_Ans = (gcnew System::Windows::Forms::Button());
+			this->Button_Sin = (gcnew System::Windows::Forms::Button());
+			this->Button_Cos = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// contextMenuStrip1
@@ -246,23 +255,23 @@ namespace TubesOOP1 {
 			this->Button_0->UseVisualStyleBackColor = true;
 			this->Button_0->Click += gcnew System::EventHandler(this, &MyForm::Button_0_Click);
 			// 
-			// Button_00
+			// Button_Tan
 			// 
-			this->Button_00->Font = (gcnew System::Drawing::Font(L"Kozuka Mincho Pr6N H", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->Button_00->Location = System::Drawing::Point(101, 381);
-			this->Button_00->Name = L"Button_00";
-			this->Button_00->Size = System::Drawing::Size(72, 59);
-			this->Button_00->TabIndex = 12;
-			this->Button_00->Text = L"00";
-			this->Button_00->UseVisualStyleBackColor = true;
-			this->Button_00->Click += gcnew System::EventHandler(this, &MyForm::Button_00_Click);
+			this->Button_Tan->Font = (gcnew System::Drawing::Font(L"Kozuka Mincho Pr6N H", 11, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(128)));
+			this->Button_Tan->Location = System::Drawing::Point(363, 310);
+			this->Button_Tan->Name = L"Button_Tan";
+			this->Button_Tan->Size = System::Drawing::Size(72, 59);
+			this->Button_Tan->TabIndex = 12;
+			this->Button_Tan->Text = L"TAN";
+			this->Button_Tan->UseVisualStyleBackColor = true;
+			this->Button_Tan->Click += gcnew System::EventHandler(this, &MyForm::Button_Tan_Click);
 			// 
 			// Button_Dot
 			// 
 			this->Button_Dot->Font = (gcnew System::Drawing::Font(L"Kozuka Mincho Pr6N H", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Button_Dot->Location = System::Drawing::Point(188, 381);
+			this->Button_Dot->Location = System::Drawing::Point(101, 381);
 			this->Button_Dot->Name = L"Button_Dot";
 			this->Button_Dot->Size = System::Drawing::Size(72, 59);
 			this->Button_Dot->TabIndex = 13;
@@ -276,7 +285,7 @@ namespace TubesOOP1 {
 				static_cast<System::Byte>(0)));
 			this->Button_Plus->Location = System::Drawing::Point(276, 310);
 			this->Button_Plus->Name = L"Button_Plus";
-			this->Button_Plus->Size = System::Drawing::Size(72, 131);
+			this->Button_Plus->Size = System::Drawing::Size(72, 59);
 			this->Button_Plus->TabIndex = 14;
 			this->Button_Plus->Text = L"+";
 			this->Button_Plus->UseVisualStyleBackColor = true;
@@ -310,7 +319,7 @@ namespace TubesOOP1 {
 			// 
 			this->Button_Divide->Font = (gcnew System::Drawing::Font(L"Kozuka Mincho Pr6N H", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Button_Divide->Location = System::Drawing::Point(363, 151);
+			this->Button_Divide->Location = System::Drawing::Point(276, 381);
 			this->Button_Divide->Name = L"Button_Divide";
 			this->Button_Divide->Size = System::Drawing::Size(72, 59);
 			this->Button_Divide->TabIndex = 17;
@@ -322,7 +331,7 @@ namespace TubesOOP1 {
 			// 
 			this->Button_Sqrt->Font = (gcnew System::Drawing::Font(L"Kozuka Mincho Pr6N H", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Button_Sqrt->Location = System::Drawing::Point(363, 233);
+			this->Button_Sqrt->Location = System::Drawing::Point(363, 381);
 			this->Button_Sqrt->Name = L"Button_Sqrt";
 			this->Button_Sqrt->Size = System::Drawing::Size(72, 59);
 			this->Button_Sqrt->TabIndex = 18;
@@ -334,9 +343,9 @@ namespace TubesOOP1 {
 			// 
 			this->Button_Equal->Font = (gcnew System::Drawing::Font(L"Kozuka Mincho Pr6N H", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Button_Equal->Location = System::Drawing::Point(363, 310);
+			this->Button_Equal->Location = System::Drawing::Point(188, 381);
 			this->Button_Equal->Name = L"Button_Equal";
-			this->Button_Equal->Size = System::Drawing::Size(72, 131);
+			this->Button_Equal->Size = System::Drawing::Size(72, 60);
 			this->Button_Equal->TabIndex = 19;
 			this->Button_Equal->Text = L"=";
 			this->Button_Equal->UseVisualStyleBackColor = true;
@@ -356,8 +365,8 @@ namespace TubesOOP1 {
 			// 
 			// Layar_Hasil
 			// 
-			this->Layar_Hasil->Font = (gcnew System::Drawing::Font(L"Kozuka Mincho Pr6N R", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
+			this->Layar_Hasil->Font = (gcnew System::Drawing::Font(L"Kozuka Mincho Pr6N R", 16, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(128)));
 			this->Layar_Hasil->Location = System::Drawing::Point(12, 19);
 			this->Layar_Hasil->Multiline = true;
 			this->Layar_Hasil->Name = L"Layar_Hasil";
@@ -401,12 +410,38 @@ namespace TubesOOP1 {
 			this->Button_Ans->UseVisualStyleBackColor = true;
 			this->Button_Ans->Click += gcnew System::EventHandler(this, &MyForm::Button_Ans_Click);
 			// 
+			// Button_Sin
+			// 
+			this->Button_Sin->Font = (gcnew System::Drawing::Font(L"Kozuka Mincho Pr6N H", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->Button_Sin->Location = System::Drawing::Point(363, 151);
+			this->Button_Sin->Name = L"Button_Sin";
+			this->Button_Sin->Size = System::Drawing::Size(72, 59);
+			this->Button_Sin->TabIndex = 26;
+			this->Button_Sin->Text = L"SIN";
+			this->Button_Sin->UseVisualStyleBackColor = true;
+			this->Button_Sin->Click += gcnew System::EventHandler(this, &MyForm::Button_Sin_Click);
+			// 
+			// Button_Cos
+			// 
+			this->Button_Cos->Font = (gcnew System::Drawing::Font(L"Kozuka Mincho Pr6N H", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->Button_Cos->Location = System::Drawing::Point(363, 233);
+			this->Button_Cos->Name = L"Button_Cos";
+			this->Button_Cos->Size = System::Drawing::Size(72, 59);
+			this->Button_Cos->TabIndex = 27;
+			this->Button_Cos->Text = L"COS";
+			this->Button_Cos->UseVisualStyleBackColor = true;
+			this->Button_Cos->Click += gcnew System::EventHandler(this, &MyForm::Button_Cos_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoScroll = true;
 			this->ClientSize = System::Drawing::Size(540, 453);
+			this->Controls->Add(this->Button_Cos);
+			this->Controls->Add(this->Button_Sin);
 			this->Controls->Add(this->Button_Ans);
 			this->Controls->Add(this->Button_MR);
 			this->Controls->Add(this->Button_MC);
@@ -419,7 +454,7 @@ namespace TubesOOP1 {
 			this->Controls->Add(this->Button_Minus);
 			this->Controls->Add(this->Button_Plus);
 			this->Controls->Add(this->Button_Dot);
-			this->Controls->Add(this->Button_00);
+			this->Controls->Add(this->Button_Tan);
 			this->Controls->Add(this->Button_0);
 			this->Controls->Add(this->Button_3);
 			this->Controls->Add(this->Button_2);
@@ -430,7 +465,6 @@ namespace TubesOOP1 {
 			this->Controls->Add(this->Button_9);
 			this->Controls->Add(this->Button_8);
 			this->Controls->Add(this->Button_7);
-			this->Enabled = false;
 			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->Name = L"MyForm";
@@ -444,9 +478,10 @@ namespace TubesOOP1 {
 		// BUTTON UNTUK OPERASI TAMBAHAN
 
 		private: System::Void Button_Equal_Click(System::Object^ sender, System::EventArgs^ e) {
-			msclr::interop::marshal_context context;
-			string input = context.marshal_as<string>(Layar_Hasil->Text);
-			Evaluator<float, int>* Eval = new Evaluator<float, int>();
+			flag = true;
+			string input = ekspresi;
+			Evaluator<double, double>* Eval = new Evaluator<double, double>();
+			ekspresi = "";
 			try {
 				double result = Eval->solve(input);
 				Layar_Hasil->Text = gcnew String(result.ToString());
@@ -463,26 +498,38 @@ namespace TubesOOP1 {
 
 		private: System::Void Button_MR_Click(System::Object^ sender, System::EventArgs^ e) {
 			double get = Hist->MR();
-			if (Layar_Hasil->Text->Contains("ERROR")) {
+			if (Layar_Hasil->Text->Contains("ERROR") || flag) {
 				Layar_Hasil->Text = gcnew String(get.ToString());
+				flag = false;
+				flagmr = true;
 			}
 			else {
 				String^ temp = gcnew String(get.ToString());
 				Layar_Hasil->Text = Layar_Hasil->Text + temp;
 			}
+			ostringstream strs;
+			strs << get;
+			string temp = strs.str();
+			ekspresi = ekspresi + temp;
 		}
 
 		private: System::Void Button_Clear_Click(System::Object^ sender, System::EventArgs^ e) {
 			Layar_Hasil->Text = "";
+			ekspresi = "";
 		}
 
 		private: System::Void Button_Ans_Click(System::Object^ sender, System::EventArgs^ e) {
-			if (Layar_Hasil->Text->Contains("ERROR")) {
+			if (Layar_Hasil->Text->Contains("ERROR") || flag) {
 				Layar_Hasil->Text = "Ans";
+				flag = false;
 			}
 			else {
-				Layar_Hasil->Text = Layar_Hasil->Text + "Ans";
+				Layar_Hasil->Text = Layar_Hasil->Text + gcnew String(Ans.ToString());
 			}
+			ostringstream strs;
+			strs << Ans;
+			string temp = strs.str();
+			ekspresi = ekspresi + temp;
 		}
 
 		// BUTTON UNTUK OPERASI ARITMATIKA
@@ -491,17 +538,41 @@ namespace TubesOOP1 {
 			if (Layar_Hasil->Text->Contains("ERROR")) {
 				Layar_Hasil->Text = "+";
 			}
+			else if (flag) {
+				flag = false;
+				Layar_Hasil->Text = "Ans+";
+				ostringstream strs;
+				strs << Ans;
+				string temp = strs.str();
+				ekspresi = ekspresi + temp;
+			}
 			else {
 				Layar_Hasil->Text = Layar_Hasil->Text + "+";
 			}
+			ekspresi = ekspresi + "+";
 		}
 
 		private: System::Void Button_Minus_Click(System::Object^ sender, System::EventArgs^ e) {
 			if (Layar_Hasil->Text->Contains("ERROR")) {
 				Layar_Hasil->Text = "-";
+				
+			}
+			else if (flag) {
+				flag = false;
+				Layar_Hasil->Text = "Ans-";
+				ostringstream strs;
+				strs << Ans;
+				string temp = strs.str();
+				ekspresi = ekspresi + temp;
 			}
 			else {
 				Layar_Hasil->Text = Layar_Hasil->Text + "-";
+			}
+			if (ekspresi.back() == '+' || ekspresi.back() == '-' || ekspresi.back() == 'x' || ekspresi.back() == '/' || ekspresi.back() == '_' || ekspresi.back() == '$' || ekspresi.back() == '#' || ekspresi.back() == '@' || ekspresi == "") {
+				ekspresi = ekspresi + "~";
+			}
+			else {
+				ekspresi = ekspresi + "-";
 			}
 		}
 
@@ -509,137 +580,204 @@ namespace TubesOOP1 {
 			if (Layar_Hasil->Text->Contains("ERROR")) {
 				Layar_Hasil->Text = "x";
 			}
+			else if (flag) {
+				flag = false;
+				Layar_Hasil->Text = "Ansx";
+				ostringstream strs;
+				strs << Ans;
+				string temp = strs.str();
+				ekspresi = ekspresi + temp;
+			}
 			else {
 				Layar_Hasil->Text = Layar_Hasil->Text + "x";
 			}
+			ekspresi = ekspresi + "x";
 		}
 
 		private: System::Void Button_Divide_Click(System::Object^ sender, System::EventArgs^ e) {
 			if (Layar_Hasil->Text->Contains("ERROR")) {
 				Layar_Hasil->Text = "/";
+				
+			}
+			else if (flag) {
+				flag = false;
+				Layar_Hasil->Text = "Ans/";
+				ostringstream strs;
+				strs << Ans;
+				string temp = strs.str();
+				ekspresi = ekspresi + temp;
 			}
 			else {
 				Layar_Hasil->Text = Layar_Hasil->Text + "/";
 			}
+			ekspresi = ekspresi + "/";
 		}
 
 		private: System::Void Button_Sqrt_Click(System::Object^ sender, System::EventArgs^ e) {
-			if (Layar_Hasil->Text->Contains("ERROR")) {
-				Layar_Hasil->Text = "sqrt";
+			if (Layar_Hasil->Text->Contains("ERROR") || flag) {
+				Layar_Hasil->Text = "Sqrt";
+				flag = false;
 			}
 			else {
-				Layar_Hasil->Text = Layar_Hasil->Text + "sqrt";
+				Layar_Hasil->Text = Layar_Hasil->Text + "Sqrt";
 			}
+			ekspresi = ekspresi + "_";
 		}
 
 		private: System::Void Button_Dot_Click(System::Object^ sender, System::EventArgs^ e) {
-			if (Layar_Hasil->Text->Contains("ERROR")) {
+			if (Layar_Hasil->Text->Contains("ERROR") || flag) {
 				Layar_Hasil->Text = ".";
+				flag = false;
 			}
 			else {
 				Layar_Hasil->Text = Layar_Hasil->Text + ".";
 			}
+			ekspresi = ekspresi + ".";
+		}
+
+		private: System::Void Button_Sin_Click(System::Object^ sender, System::EventArgs^ e) {
+			if (Layar_Hasil->Text->Contains("ERROR") || flag) {
+				Layar_Hasil->Text = "Sin";
+				flag = false;
+			}
+			else {
+				Layar_Hasil->Text = Layar_Hasil->Text + "Sin";
+			}
+			ekspresi = ekspresi + "$";
+		}
+
+		private: System::Void Button_Cos_Click(System::Object^ sender, System::EventArgs^ e) {
+			if (Layar_Hasil->Text->Contains("ERROR") || flag) {
+				Layar_Hasil->Text = "Cos";
+				flag = false;
+			}
+			else {
+				Layar_Hasil->Text = Layar_Hasil->Text + "Cos";
+			}
+			ekspresi = ekspresi + "#";
+		}
+
+		private: System::Void Button_Tan_Click(System::Object^ sender, System::EventArgs^ e) {
+			if (Layar_Hasil->Text->Contains("ERROR") || flag) {
+				Layar_Hasil->Text = "Tan";
+				flag = false;
+			}
+			else {
+				Layar_Hasil->Text = Layar_Hasil->Text + "Tan";
+			}
+			ekspresi = ekspresi + "@";
 		}
 
 		// BUTTON UNTUK ANGKA
 
-		private: System::Void Button_00_Click(System::Object^ sender, System::EventArgs^ e) {
-			if (Layar_Hasil->Text->Contains("ERROR")) {
-				Layar_Hasil->Text = "00";
-			}
-			else {
-				Layar_Hasil->Text = Layar_Hasil->Text + "00";
-			}
-		}
-
 		private: System::Void Button_0_Click(System::Object^ sender, System::EventArgs^ e) {
-			if (Layar_Hasil->Text->Contains("ERROR")) {
+			if (Layar_Hasil->Text->Contains("ERROR") || flag) {
 				Layar_Hasil->Text = "0";
+				flag = false;
 			}
 			else {
 				Layar_Hasil->Text = Layar_Hasil->Text + "0";
 			}
+			ekspresi = ekspresi + "0";
 		}
 
 		private: System::Void Button_1_Click(System::Object^ sender, System::EventArgs^ e) {
-			if (Layar_Hasil->Text->Contains("ERROR")) {
+			if (Layar_Hasil->Text->Contains("ERROR") || flag) {
 				Layar_Hasil->Text = "1";
+				flag = false;
 			}
 			else {
 				Layar_Hasil->Text = Layar_Hasil->Text + "1";
 			}
+			ekspresi = ekspresi + "1";
 		}
 
 		private: System::Void Button_2_Click(System::Object^ sender, System::EventArgs^ e) {
-			if (Layar_Hasil->Text->Contains("ERROR")) {
+			if (Layar_Hasil->Text->Contains("ERROR") || flag) {
 				Layar_Hasil->Text = "2";
+				flag = false;
 			}
 			else {
 				Layar_Hasil->Text = Layar_Hasil->Text + "2";
 			}
+			ekspresi = ekspresi + "2";
 		}
 
 		private: System::Void Button_3_Click(System::Object^ sender, System::EventArgs^ e) {
-			if (Layar_Hasil->Text->Contains("ERROR")) {
+			if (Layar_Hasil->Text->Contains("ERROR") || flag) {
 				Layar_Hasil->Text = "3";
+				flag = false;
 			}
 			else {
 				Layar_Hasil->Text = Layar_Hasil->Text + "3";
 			}
+			ekspresi = ekspresi + "3";
 		}
 
 		private: System::Void Button_4_Click(System::Object^ sender, System::EventArgs^ e) {
-			if (Layar_Hasil->Text->Contains("ERROR")) {
+			if (Layar_Hasil->Text->Contains("ERROR") || flag) {
 				Layar_Hasil->Text = "4";
+				flag = false;
 			}
 			else {
 				Layar_Hasil->Text = Layar_Hasil->Text + "4";
 			}
+			ekspresi = ekspresi + "4";
 		}
 
 		private: System::Void Button_5_Click(System::Object^ sender, System::EventArgs^ e) {
-			if (Layar_Hasil->Text->Contains("ERROR")) {
+			if (Layar_Hasil->Text->Contains("ERROR") || flag) {
 				Layar_Hasil->Text = "5";
+				flag = false;
 			}
 			else {
 				Layar_Hasil->Text = Layar_Hasil->Text + "5";
 			}
+			ekspresi = ekspresi + "5";
 		}
 
 		private: System::Void Button_6_Click(System::Object^ sender, System::EventArgs^ e) {
-			if (Layar_Hasil->Text->Contains("ERROR")) {
+			if (Layar_Hasil->Text->Contains("ERROR") || flag) {
 				Layar_Hasil->Text = "6";
+				flag = false;
 			}
 			else {
 				Layar_Hasil->Text = Layar_Hasil->Text + "6";
 			}
+			ekspresi = ekspresi + "6";
 		}
 
 		private: System::Void Button_7_Click(System::Object^ sender, System::EventArgs^ e) {
-			if (Layar_Hasil->Text->Contains("ERROR")) {
+			if (Layar_Hasil->Text->Contains("ERROR") || flag) {
 				Layar_Hasil->Text = "7";
+				flag = false;
 			}
 			else {
 				Layar_Hasil->Text = Layar_Hasil->Text + "7";
 			}
+			ekspresi = ekspresi + "7";
 		}
 
 		private: System::Void Button_8_Click(System::Object^ sender, System::EventArgs^ e) {
-			if (Layar_Hasil->Text->Contains("ERROR")) {
+			if (Layar_Hasil->Text->Contains("ERROR") || flag) {
 				Layar_Hasil->Text = "8";
+				flag = false;
 			}
 			else {
 				Layar_Hasil->Text = Layar_Hasil->Text + "8";
 			}
+			ekspresi = ekspresi + "8";
 		}
 
 		private: System::Void Button_9_Click(System::Object^ sender, System::EventArgs^ e) {
-			if (Layar_Hasil->Text->Contains("ERROR")) {
+			if (Layar_Hasil->Text->Contains("ERROR") || flag) {
 				Layar_Hasil->Text = "9";
+				flag = false;
 			}
 			else {
 				Layar_Hasil->Text = Layar_Hasil->Text + "9";
 			}
+			ekspresi = ekspresi + "9";
 		}
 
 		// UNTUK LAYAR
@@ -647,5 +785,5 @@ namespace TubesOOP1 {
 		private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 			// do nothing
 		}
-};
+	};
 }
