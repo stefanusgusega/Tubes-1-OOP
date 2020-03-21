@@ -47,7 +47,7 @@ class DoubleNegativeError : public BaseError {
 class EmptyQueuePopError : public BaseError {
     public:
         EmptyQueuePopError() : BaseError() {
-            this->message = "ERROR : There is no element in the queue";
+            this->message = "ERROR : There is no element in the memory";
         }
 };
 

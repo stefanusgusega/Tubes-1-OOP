@@ -6,7 +6,7 @@ void tryError() {
     int x = 9;
     int y = 0;
     if (y == 0) {
-        throw new DivisionByZeroError();
+        throw new EmptyQueuePopError();
     }
     else {
         throw 100;
