@@ -58,9 +58,17 @@ class BlankExpressionError : public BaseError {
         }
 };
 
+<<<<<<< HEAD
 class ZeroCosineNumberError : public BaseError {
     public:
     ZeroCosineNumberError() : BaseError() {
         this->message = "ERROR : Cosine is zero";
     }
+=======
+class ZeroCosineNumberError : public BaseError{
+    public:
+        ZeroCosineNumberError() : BaseError(){
+            this->message = "ERROR : Zero cosine value causes undefined tangent";
+        }
+>>>>>>> 784a7105d41abc51d791c7e36992c714500867f4
 };
