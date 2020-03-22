@@ -40,7 +40,7 @@ public:
     }
 
     T solve() {
-        if (this->x->solve() > 0) {
+        if (this->x->solve() >= 0) {
             return sqrt(this->x->solve());
         }
         else {
