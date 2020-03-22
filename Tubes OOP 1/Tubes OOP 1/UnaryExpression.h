@@ -7,7 +7,7 @@ template<class T>
 class UnaryExpression : public Expression<T> {
 protected:
     Expression<T>* x;
-
+            //UnaryExpression adalah base dari ekspresi 1 operand, operand berbentuk ekspresi
 public:
     UnaryExpression(Expression<T>* x) {
         this->x = x;
@@ -27,7 +27,7 @@ public:
         // do nothing
     }
 
-    T solve() {
+    T solve() {                         //NEGASI
         return -1 * this->x->solve();
     }
 };
@@ -42,7 +42,7 @@ public:
     T solve() {
         if (this->x->solve() >= 0) {
             return sqrt(this->x->solve());
-        }
+        }                                       //AKAR
         else {
             throw new NegativeSquareRootError();
         }
@@ -57,12 +57,7 @@ public:
     }
 
     T solve() {
-        // if (this->x->solve() > 0) {
-        return sin(this->x->solve());
-        // }
-        // else {
-        // 	throw "Imaginary Number";
-        // }
+        return sin(this->x->solve()); //EKSPRESI SINUS
     }
 };
 
@@ -74,12 +69,7 @@ public:
     }
 
     T solve() {
-        // if (this->x->solve() > 0) {
-        return cos(this->x->solve());
-        // }
-        // else {
-        // 	throw "Imaginary Number";
-        // }
+        return cos(this->x->solve()); //EKSPRESI COSINUS
     }
 };
 
@@ -92,10 +82,10 @@ public:
 
     T solve() {
         if (cos(this->x->solve()) != 0) {
-            return tan(this->x->solve());
+            return tan(this->x->solve());   //EKSPRESI TANGENT
         }
         else {
-            throw new ZeroCosineNumberError();
+            throw new ZeroCosineNumberError();  //pembagian nol ilegal
         }
     }
 };

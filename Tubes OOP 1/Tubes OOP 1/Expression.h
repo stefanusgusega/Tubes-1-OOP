@@ -10,13 +10,14 @@ class Expression {
 	public:
     	Expression() {}
     	virtual T solve() = 0;
+		//pure virtual, base dari segala expression bisa dibilang interface
 };
 
 template<class T>
 class TerminalExpression : public Expression<T> {
 	protected:
 		T x;
-
+		//base expression yg berupa suatu bilangan
 	public:
 		TerminalExpression(T x) {
 			this->x = x;
