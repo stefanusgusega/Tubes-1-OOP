@@ -5,18 +5,6 @@ using namespace std;
 #include "BinaryExpression.h"
 #include <stack>
 
-int prio(char c);
-int prio(string c);
-bool isNumber(char c);
-string intopost(string s);
-bool isUnary(char c);
-bool isUnary(string c);
-bool isUnary(char c){
-    return c == '_' || c =='$' || c=='#' || c=='@' || c=='~';
-}
-bool isUnary(string c){
-    return c == "_" || c =="$" || c=="#" || c=="@" || c=="~";
-}
 
 template<class T,class U>
 class Evaluator{
@@ -24,13 +12,12 @@ class Evaluator{
         stack<Expression<T>*> st;
     public:
         Evaluator(){
-
         }
 
-        T solve(string s){
+        T solveExpression(string s){
             string s2;
             try{
-                s2 = intopost(s);
+                s2 = convertInfixToPostfix(s);
             }catch (BaseError* err){
                 throw err;
             }
@@ -112,7 +99,8 @@ class Evaluator{
             return st.top()->solve();
         }
 
-        string intopost(string s){
+
+        string convertInfixToPostfix(string s){
             if (s == ""){
                 throw new BlankExpressionError();
             }
@@ -161,7 +149,7 @@ class Evaluator{
                         st.push(l);
                     }
                     else{
-                        while(st.top() != "N" && prio(s[i]) <= prio(st.top())){
+                        while(st.top() != "N" && checkPrio(s[i]) <= checkPrio(st.top())){
                             string c = st.top();
                             st.pop();
                             res += c;
@@ -180,26 +168,28 @@ class Evaluator{
             cout << res << endl;
             return res;
         }
-        
+
+        int checkPrio(char c){
+            if (c=='^') return 3;
+            else if (c == '*' || c == '/') return 2;
+            else if(c == '+' || c == '-') return 1;
+            else return -1;
+        }
+        int checkPrio(string c){
+            if (c=="^") return 4;
+            else if (isUnary(c)) return 3;
+            else if (c == "*" || c == "/") return 2;
+            else if(c == "+" || c == "-") return 1;
+            else return -1;
+        }
+        bool isNumber(char c){
+            return (c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c =='8' || c == '9');
+        }
+        bool isUnary(char c){
+            return c == '_' || c =='$' || c=='#' || c=='@' || c=='~';
+        }
+        bool isUnary(string c){
+            return c == "_" || c =="$" || c=="#" || c=="@" || c=="~";
+        }        
 };
 
-int prio(char c){
-    if (c=='^') return 3;
-    else if (c == '*' || c == '/') return 2;
-    else if(c == '+' || c == '-') return 1;
-    else return -1;
-}
-
-int prio(string c){
-    if (c=="^") return 4;
-    else if (isUnary(c)) return 3;
-    else if (c == "*" || c == "/") return 2;
-    else if(c == "+" || c == "-") return 1;
-    else return -1;
-}
-
-
-
-bool isNumber(char c){
-    return (c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c =='8' || c == '9');
-}

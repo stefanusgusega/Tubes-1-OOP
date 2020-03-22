@@ -1,6 +1,7 @@
 // TESTER UNTUK UNARYEXPRESSION.H
 
 #include "BinaryExpression.h"
+#include "ErrorHandling.h"
 
 int main() {
     AddExpression<float, int>* ae = new AddExpression<float, int>(new TerminalExpression<float>(3.4), new TerminalExpression<int>(3));
