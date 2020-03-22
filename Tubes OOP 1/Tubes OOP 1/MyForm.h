@@ -529,7 +529,7 @@ namespace TubesOOP1 {
 				flag = false;
 			}
 			else {
-				Layar_Hasil->Text = Layar_Hasil->Text + gcnew String(Ans.ToString());
+				Layar_Hasil->Text = Layar_Hasil->Text + "Ans";
 			}
 			ostringstream strs;
 			strs << Ans;
@@ -568,7 +568,7 @@ namespace TubesOOP1 {
 				ostringstream strs;
 				strs << Ans;
 				string temp = strs.str();
-				ekspresi = ekspresi + temp;
+				ekspresi = temp;
 			}
 			else {
 				Layar_Hasil->Text = Layar_Hasil->Text + "-";
