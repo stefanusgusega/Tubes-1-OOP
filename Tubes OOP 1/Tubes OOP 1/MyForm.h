@@ -484,7 +484,7 @@ namespace TubesOOP1 {
 			ekspresi = "";
 			try {
 				double result = Eval->solveExpression(input);
-				Layar_Hasil->Text = gcnew String(result.ToString());			//saat '=' ditekan, evaluator dipanggil untuk mengevaluasi ekspresi yang sudah ditulis pemakai
+				Layar_Hasil->Text = gcnew String(result.ToString());
 				Ans = result;
 			}
 			catch (BaseError * err) {
@@ -493,7 +493,7 @@ namespace TubesOOP1 {
 		}
 
 		private: System::Void Button_MC_Click(System::Object^ sender, System::EventArgs^ e) {
-			Hist->mc(Ans);					//menyimpan data (push)
+			Hist->mc(Ans);
 		}
 
 		private: System::Void Button_MR_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -505,7 +505,7 @@ namespace TubesOOP1 {
 				if (Layar_Hasil->Text->Contains("ERROR") || flag) {
 					Layar_Hasil->Text = gcnew String(get.ToString());
 					flag = false;
-				}							//pop ke ekspresi di layar
+				}
 				else {
 					String^ temps = gcnew String(get.ToString());
 					Layar_Hasil->Text = Layar_Hasil->Text + temps;
@@ -521,7 +521,7 @@ namespace TubesOOP1 {
 			Layar_Hasil->Text = "";
 			ekspresi = "";
 			Hist->clear();
-		}		//CLEAR LAYAR
+		}
 
 		private: System::Void Button_Ans_Click(System::Object^ sender, System::EventArgs^ e) {
 			if (Layar_Hasil->Text->Contains("ERROR") || flag) {
@@ -531,13 +531,13 @@ namespace TubesOOP1 {
 			else {
 				Layar_Hasil->Text = Layar_Hasil->Text + "Ans";
 			}
-			ostringstream strs;				//memanggil hasil ekspresi sebelumnya
+			ostringstream strs;
 			strs << Ans;
 			string temp = strs.str();
 			ekspresi = ekspresi + temp;
 		}
 
-			   // BUTTON UNTUK OPERASI ARITMATIKA, setiapnya self explanatory berdasarkan nama methodnya
+			   // BUTTON UNTUK OPERASI ARITMATIKA
 
 		private: System::Void Button_Plus_Click(System::Object^ sender, System::EventArgs^ e) {
 			if (Layar_Hasil->Text->Contains("ERROR")) {
@@ -547,7 +547,14 @@ namespace TubesOOP1 {
 				flag = false;
 				Layar_Hasil->Text = "Ans+";
 				ostringstream strs;
-				strs << Ans;					
+				if (Ans < 0) {
+					int posAns = Ans * -1;
+					ekspresi = ekspresi + "~";
+					strs << posAns;
+				}
+				else {
+					strs << Ans;
+				}
 				string temp = strs.str();
 				ekspresi = ekspresi + temp;
 			}
@@ -566,9 +573,16 @@ namespace TubesOOP1 {
 				flag = false;
 				Layar_Hasil->Text = "Ans-";
 				ostringstream strs;
-				strs << Ans;
+				if (Ans < 0) {
+					int posAns = Ans * -1;
+					ekspresi = ekspresi + "~";
+					strs << posAns;
+				}
+				else {
+					strs << Ans;
+				}
 				string temp = strs.str();
-				ekspresi = temp;
+				ekspresi = ekspresi + temp;
 			}
 			else {
 				Layar_Hasil->Text = Layar_Hasil->Text + "-";
@@ -594,7 +608,14 @@ namespace TubesOOP1 {
 				flag = false;
 				Layar_Hasil->Text = "Ansx";
 				ostringstream strs;
-				strs << Ans;
+				if (Ans < 0) {
+					int posAns = Ans * -1;
+					ekspresi = ekspresi + "~";
+					strs << posAns;
+				}
+				else {
+					strs << Ans;
+				}
 				string temp = strs.str();
 				ekspresi = ekspresi + temp;
 			}
@@ -613,7 +634,14 @@ namespace TubesOOP1 {
 				flag = false;
 				Layar_Hasil->Text = "Ans/";
 				ostringstream strs;
-				strs << Ans;
+				if (Ans < 0) {
+					int posAns = Ans * -1;
+					ekspresi = ekspresi + "~";
+					strs << posAns;
+				}
+				else {
+					strs << Ans;
+				}
 				string temp = strs.str();
 				ekspresi = ekspresi + temp;
 			}
