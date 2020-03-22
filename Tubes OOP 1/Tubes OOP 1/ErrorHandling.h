@@ -65,16 +65,16 @@ class ZeroCosineNumberError : public BaseError{
         }
 };
 
-class UnbalanceBracketException : public BaseError{
-    public:
-        UnbalanceBracketException() : BaseError(){
-            message = "ERROR : UNBALANCED BRACKET DETECTED, PLEASE CORRECT YOUR EXPRESSION\n";
-        }
-};
+// class UnbalanceBracketException : public BaseError{
+//     public:
+//         UnbalanceBracketException() : BaseError(){
+//             message = "ERROR : UNBALANCED BRACKET DETECTED, PLEASE CORRECT YOUR EXPRESSION\n";
+//         }
+// };
 
-class IllegalExpressionMemberException : public BaseError{
-    public:
-        IllegalExpressionMemberException() : BaseError(){
-            message = "ERROR : Illegal character found in the expression\n";
-        }
-};
+// class IllegalExpressionMemberException : public BaseError{
+//     public:
+//         IllegalExpressionMemberException() : BaseError(){
+//             message = "ERROR : Illegal character found in the expression\n";
+//         }
+// };

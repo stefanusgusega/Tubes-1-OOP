@@ -101,12 +101,12 @@ class Evaluator{
 
 
         string convertInfixToPostfix(string s){
-            try{
-                checkLegal(s);
-            }
-            catch(BaseError err){
-                throw err;
-            }
+            // try{
+            //     checkLegal(s);
+            // }
+            // catch(BaseError err){
+            //     throw err;
+            // }
             if (s == ""){
                 throw new BlankExpressionError();
             }
@@ -198,23 +198,23 @@ class Evaluator{
             return c == "_" || c =="$" || c=="#" || c=="@" || c=="~";
         }  
 
-        bool legal(char c){
-            string s = "abcdefghijklmnopqrstuvwxyz!&%`'|}{[]:;?<>,ABCDEFGHIJKLMNOQPRSTUVWXYZ";
-            for(int i = 0 ; i < s.length() ; i ++){
-                if (c == s[i]) return false;
-            }
-            return true;
-        }
+        // bool legal(char c){
+        //     string s = "abcdefghijklmnopqrstuvwxyz!&%`'|}{[]:;?<>,ABCDEFGHIJKLMNOQPRSTUVWXYZ";
+        //     for(int i = 0 ; i < s.length() ; i ++){
+        //         if (c == s[i]) return false;
+        //     }
+        //     return true;
+        // }
 
-        void checkLegal(string s){
-            int left=0,right=0;
-            for (int i = 0; i < s.length(); i ++){
-                if (!legal(s[i])) throw new IllegalExpressionMemberException();
-                if (s[i] == '(') left++;
-                if (s[i] == ')') right++;
-            }
-            if (left != right) throw new UnbalanceBracketException();
-        }
+        // void checkLegal(string s){
+        //     int left=0,right=0;
+        //     for (int i = 0; i < s.length(); i ++){
+        //         if (!legal(s[i])) throw new IllegalExpressionMemberException();
+        //         if (s[i] == '(') left++;
+        //         if (s[i] == ')') right++;
+        //     }
+        //     if (left != right) throw new UnbalanceBracketException();
+        // }
 
         
 };
