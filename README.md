@@ -11,3 +11,11 @@ Untuk melakukan kompilasi terhadap program, diperlukan Visual Studio yang sebelu
 Jika semua kebutuhan di atas sudah terpenuhi, maka untuk menjalankan program, kita dapat mengklik **Local Windows Debugger** pada Visual Studio atau menjalankan program **Tubes OOP 1.exe** pada folder **Debug**
 
 #### Screenshot aplikasi
+##### Gambar 1. Contoh masukan ekspresi
+![Screenshot1](https://github.com/stefanusgusega/Tubes-1-OOP/blob/master/Screenshots/Screenshot1.png)
+
+##### Gambar 2. Hasil keluaran ekspresi
+![Screenshot3](https://github.com/stefanusgusega/Tubes-1-OOP/blob/master/Screenshots/Screenshot3.png)
+
+##### Gambar 3. Contoh penanganan *error* (Pembagian dibagi 0)
+![Screenshot2](https://github.com/stefanusgusega/Tubes-1-OOP/blob/master/Screenshots/Screenshot2.png)
