@@ -12,14 +12,14 @@ int main() {
         cin >> a >> op >> b;
         try {
             if (b == -999) {
-                b = history.MR();
+                b = history.mr();
             }
             else if (a == -999) {
-                a = history.MR();
+                a = history.mr();
             }
         }
-        catch (const char* err) {
-            cout << "Memori kosong" << endl;
+        catch (BaseError* err) {
+            cout << err->getMessage() << endl;
             break;
         }
         if (op == "+") {
@@ -47,7 +47,7 @@ int main() {
         cout << "MC? ";
         cin >> mc;
         if (mc == "MC") {
-            history.MC(res);
+            history.mc(res);
         }
         // history.viewQueue();
         cout << "Lagi? ";

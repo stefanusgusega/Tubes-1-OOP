@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Expression.h"
+#include "ErrorHandling.h"
 
 template<class T>
 class UnaryExpression : public Expression<T> {

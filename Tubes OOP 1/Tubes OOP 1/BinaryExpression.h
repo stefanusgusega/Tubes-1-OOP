@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Expression.h"
+#include "ErrorHandling.h"
 
 template<class T, class U>
 class BinaryExpression : public Expression<T> {
@@ -70,7 +71,8 @@ class DivideExpression : public BinaryExpression<T, U> {
 
 		T solve() {
 			if (this->x2->solve() == 0) {
-				throw "Something"; // Ganti dengan Exception
+				// throw "Something"; // Ganti dengan Exception
+				throw new DivisionByZeroError;
 			}
 			else {
 				return this->x1->solve() / this->x2->solve();

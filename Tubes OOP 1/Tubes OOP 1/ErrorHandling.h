@@ -57,3 +57,10 @@ class BlankExpressionError : public BaseError {
             this->message = "ERROR : There is no Expression to count";
         }
 };
+
+class ZeroCosineNumberError : public BaseError {
+    public:
+    ZeroCosineNumberError() : BaseError() {
+        this->message = "ERROR : Cosine is zero";
+    }
+};

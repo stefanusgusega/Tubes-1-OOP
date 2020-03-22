@@ -493,11 +493,11 @@ namespace TubesOOP1 {
 		}
 
 		private: System::Void Button_MC_Click(System::Object^ sender, System::EventArgs^ e) {
-			Hist->MC(Ans);
+			Hist->mc(Ans);
 		}
 
 		private: System::Void Button_MR_Click(System::Object^ sender, System::EventArgs^ e) {
-			double get = Hist->MR();
+			double get = Hist->mr();
 			if (Layar_Hasil->Text->Contains("ERROR") || flag) {
 				Layar_Hasil->Text = gcnew String(get.ToString());
 				flag = false;

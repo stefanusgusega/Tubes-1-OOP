@@ -3,6 +3,7 @@
 #include "UnaryExpression.h"
 #include "BinaryExpression.h"
 #include <iterator>
+#include "ErrorHandling.h"
 using namespace std;
 
 template<class T>
@@ -16,17 +17,17 @@ class History {
     ~History() {
 
     }
-    void MC(T res) { // tombol MC : menyimpan memori
+    void mc(T res) { // tombol MC : menyimpan memori
         hist.push(res);
     }
-    T MR() { // tombol MR : memory recall
+    T mr() { // tombol MR : memory recall
         T first;
         if (!hist.empty()) {
             first = hist.front();   
             hist.pop();
         }
         else {
-            throw "Empty queue";
+            throw new EmptyQueuePopError();
         }
         return first;
     }
