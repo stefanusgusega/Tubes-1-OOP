@@ -37,7 +37,7 @@ class Evaluator{
                         i++;
                     }
                     i--;
-                    cout << num << "PUSHED" << endl;
+                    // cout << num << "PUSHED" << endl;
                     if (num.find('.') != -1) st.push(new TerminalExpression<T>(stod(num)));
                     else st.push(new TerminalExpression<T>((int) stod(num)));
                 }
@@ -101,6 +101,12 @@ class Evaluator{
 
 
         string convertInfixToPostfix(string s){
+            try{
+                checkLegal(s);
+            }
+            catch(BaseError err){
+                throw err;
+            }
             if (s == ""){
                 throw new BlankExpressionError();
             }
@@ -165,7 +171,7 @@ class Evaluator{
                 res += st.top();
                 st.pop();
             }
-            cout << res << endl;
+            // cout << res << endl;
             return res;
         }
 
@@ -190,6 +196,26 @@ class Evaluator{
         }
         bool isUnary(string c){
             return c == "_" || c =="$" || c=="#" || c=="@" || c=="~";
-        }        
+        }  
+
+        bool legal(char c){
+            string s = "abcdefghijklmnopqrstuvwxyz!&%`'|}{[]:;?<>,ABCDEFGHIJKLMNOQPRSTUVWXYZ";
+            for(int i = 0 ; i < s.length() ; i ++){
+                if (c == s[i]) return false;
+            }
+            return true;
+        }
+
+        void checkLegal(string s){
+            int left=0,right=0;
+            for (int i = 0; i < s.length(); i ++){
+                if (!legal(s[i])) throw new IllegalExpressionMemberException();
+                if (s[i] == '(') left++;
+                if (s[i] == ')') right++;
+            }
+            if (left != right) throw new UnbalanceBracketException();
+        }
+
+        
 };
 

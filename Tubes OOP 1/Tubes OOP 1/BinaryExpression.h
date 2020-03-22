@@ -2,7 +2,7 @@
 
 #include "Expression.h"
 #include "ErrorHandling.h"
-
+// Mengimplementasikan 
 template<class T, class U>
 class BinaryExpression : public Expression<T> {
 	protected:
