@@ -125,7 +125,7 @@
     <ClInclude Include="BinaryExpression.h" />
     <ClInclude Include="History.h" />
     <ClInclude Include="MyForm.h">
-      <FileType>CppForm</FileType>
+      <FileType>CppHeader</FileType>
     </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="UnaryExpression.h" />

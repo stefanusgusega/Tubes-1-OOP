@@ -483,7 +483,7 @@ namespace TubesOOP1 {
 			Evaluator<double, double>* Eval = new Evaluator<double, double>();
 			ekspresi = "";
 			try {
-				double result = Eval->solve(input);
+				double result = Eval->solveExpression(input);
 				Layar_Hasil->Text = gcnew String(result.ToString());
 				Ans = result;
 			}
@@ -497,25 +497,30 @@ namespace TubesOOP1 {
 		}
 
 		private: System::Void Button_MR_Click(System::Object^ sender, System::EventArgs^ e) {
-			double get = Hist->mr();
-			if (Layar_Hasil->Text->Contains("ERROR") || flag) {
-				Layar_Hasil->Text = gcnew String(get.ToString());
-				flag = false;
-				flagmr = true;
+			try {
+				double get = Hist->mr();
+				ostringstream strs;
+				strs << get;
+				string temp = strs.str();
+				if (Layar_Hasil->Text->Contains("ERROR") || flag) {
+					Layar_Hasil->Text = gcnew String(get.ToString());
+					flag = false;
+				}
+				else {
+					String^ temps = gcnew String(get.ToString());
+					Layar_Hasil->Text = Layar_Hasil->Text + temps;
+				}
+				ekspresi = ekspresi + temp;
 			}
-			else {
-				String^ temp = gcnew String(get.ToString());
-				Layar_Hasil->Text = Layar_Hasil->Text + temp;
+			catch (BaseError * err) {
+				Layar_Hasil->Text = gcnew String(err->getMessage().c_str());
 			}
-			ostringstream strs;
-			strs << get;
-			string temp = strs.str();
-			ekspresi = ekspresi + temp;
 		}
 
 		private: System::Void Button_Clear_Click(System::Object^ sender, System::EventArgs^ e) {
 			Layar_Hasil->Text = "";
 			ekspresi = "";
+			Hist->clear();
 		}
 
 		private: System::Void Button_Ans_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -532,7 +537,7 @@ namespace TubesOOP1 {
 			ekspresi = ekspresi + temp;
 		}
 
-		// BUTTON UNTUK OPERASI ARITMATIKA
+			   // BUTTON UNTUK OPERASI ARITMATIKA
 
 		private: System::Void Button_Plus_Click(System::Object^ sender, System::EventArgs^ e) {
 			if (Layar_Hasil->Text->Contains("ERROR")) {
@@ -555,7 +560,7 @@ namespace TubesOOP1 {
 		private: System::Void Button_Minus_Click(System::Object^ sender, System::EventArgs^ e) {
 			if (Layar_Hasil->Text->Contains("ERROR")) {
 				Layar_Hasil->Text = "-";
-				
+
 			}
 			else if (flag) {
 				flag = false;
@@ -591,13 +596,13 @@ namespace TubesOOP1 {
 			else {
 				Layar_Hasil->Text = Layar_Hasil->Text + "x";
 			}
-			ekspresi = ekspresi + "x";
+			ekspresi = ekspresi + "*";
 		}
 
 		private: System::Void Button_Divide_Click(System::Object^ sender, System::EventArgs^ e) {
 			if (Layar_Hasil->Text->Contains("ERROR")) {
 				Layar_Hasil->Text = "/";
-				
+
 			}
 			else if (flag) {
 				flag = false;
@@ -668,7 +673,7 @@ namespace TubesOOP1 {
 			ekspresi = ekspresi + "@";
 		}
 
-		// BUTTON UNTUK ANGKA
+			   // BUTTON UNTUK ANGKA
 
 		private: System::Void Button_0_Click(System::Object^ sender, System::EventArgs^ e) {
 			if (Layar_Hasil->Text->Contains("ERROR") || flag) {
@@ -780,7 +785,7 @@ namespace TubesOOP1 {
 			ekspresi = ekspresi + "9";
 		}
 
-		// UNTUK LAYAR
+			   // UNTUK LAYAR
 
 		private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 			// do nothing
