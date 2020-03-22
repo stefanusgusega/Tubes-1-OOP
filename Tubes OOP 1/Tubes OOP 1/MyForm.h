@@ -11,7 +11,7 @@
 double Ans = 0;
 bool flag = false; // Flag untuk mengecek apakah tombol = ditekan
 bool flagmr = false; // Flag untuk mengecek apakah tombol mr ditekan
-string ekspresi;
+string ekspresi = "";
 History<double>* Hist = new History<double>();
 
 namespace TubesOOP1 {
@@ -573,11 +573,16 @@ namespace TubesOOP1 {
 			else {
 				Layar_Hasil->Text = Layar_Hasil->Text + "-";
 			}
-			if (ekspresi.back() == '+' || ekspresi.back() == '-' || ekspresi.back() == 'x' || ekspresi.back() == '/' || ekspresi.back() == '_' || ekspresi.back() == '$' || ekspresi.back() == '#' || ekspresi.back() == '@' || ekspresi == "") {
-				ekspresi = ekspresi + "~";
+			if (ekspresi.length() == 0) {
+				ekspresi = "~";
 			}
 			else {
-				ekspresi = ekspresi + "-";
+				if (ekspresi.back() == '+' || ekspresi.back() == '-' || ekspresi.back() == '*' || ekspresi.back() == '/' || ekspresi.back() == '_' || ekspresi.back() == '$' || ekspresi.back() == '#' || ekspresi.back() == '@') {
+					ekspresi = ekspresi + "~";
+				}
+				else {
+					ekspresi = ekspresi + "-";
+				}
 			}
 		}
 
