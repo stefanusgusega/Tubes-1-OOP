@@ -13,74 +13,56 @@ class Evaluator{
     public:
         Evaluator(){
         }
+        
 
+        //Menerima string ekspresi dan mereturn hasil evaluasi string tersebut sebagai ekspresi
         T solveExpression(string s){
             string s2;
             try{
-                s2 = convertInfixToPostfix(s);
+                s2 = convertInfixToPostfix(s); //try mengecek input error
             }catch (BaseError* err){
                 throw err;
             }
 
-            // cout << s2 << endl;
             int l = s2.length();
             for (int i = 0; i < l-1; i++){
-                // cout << s2[i] <<"  " <<endl;
                 if (isNumber(s2[i]) || s2[i] == '.'){
-                    // cout << "here" << endl;
                     string num = "";
                     while(isNumber(s2[i]) || s2[i] == '.'){
-                        // cout << s2[i]<< endl;
                         if (s2[i] == '.' && num.find('.') != -1) throw new DoublePointError();
                         num += s2[i];
-                        // cout << num << endl;
                         i++;
                     }
                     i--;
-                    // cout << num << "PUSHED" << endl;
                     if (num.find('.') != -1) st.push(new TerminalExpression<T>(stod(num)));
                     else st.push(new TerminalExpression<T>((int) stod(num)));
                 }
                 else if(s2[i] == ' '){ 
-                    // cout << "found spaces " << s2[i] << endl;
                     continue;
                 }
                 else{
-                    // cout<<"there"<<endl;
                     if (!isUnary(s2[i])){
-                        Expression<T>* val2 = st.top();
-                        // cout << "lol" << val2->solve() << endl;
+                        Expression<T>* val2 = st.top();     //ALGORITMA EVALUASI POSTFIX PERNAH DIIMPLEMENTASIKAN SEBELUMNYA SAAT ALSTRUKDAT
                         st.pop();
-                        // cout << st.top()->solve() << endl;
-                        // cout << "hi";
                         Expression<T>* val1 = st.top();
                         st.pop();
-                        // cout << "hi" << endl;
-                        // cout<<"found" << s2[i] << endl;
                         if (s2[i] == '+'){
-                            // cout << "+ detected " << endl;
-                            // cout << val1+val2 << endl;
                             st.push(new AddExpression<T,U>(val1,val2));
-                            // cout << st.top()->solve() << "PUSHED" << endl;
                         }
                         else if (s2[i] == '-'){
                             st.push(new SubstractExpression<T,U>(val1,val2));
-                            // cout << st.top()->solve() << "PUSHED" << endl;
                         }
                         else if (s2[i] == '*'){
                             // cout << "CUK" << endl;
                             st.push(new MultiplyExpression<T,U>(val1,val2));
-                            // cout << st.top()->solve() << "PUSHED" << endl;
                         }
                         else if (s2[i] == '/'){
                             st.push(new DivideExpression<T,U>(val1,val2));
-                            // cout << st.top()->solve() << "PUSHED" << endl;
                         }
                         else if (s2[i] == '^'){
                             st.push(new MultiplyExpression<T,U>(val1,new TerminalExpression<T>(pow(val1->solve(),val2->solve()-1))));
-                            // cout << st.top()->solve() << "PUSHED" << endl;
                         }
-                    }else{
+                    }else
                         Expression<T>* val1 = st.top();st.pop();
                         if (s2[i] == '_') st.push(new SquareRootExpression<T>(val1));
                         else if (s2[i] == '$') st.push(new SineExpression<T>(val1));
@@ -99,23 +81,17 @@ class Evaluator{
             return st.top()->solve();
         }
 
-
+        //Mengkonversi ekspresi infix menjadi postfix
         string convertInfixToPostfix(string s){
-            try{
-                checkLegal(s);
-            }
-            catch(BaseError err){
-                throw err;
-            }
             if (s == ""){
-                throw new BlankExpressionError();
+                throw new BlankExpressionError();//klo kosong error
             }
             stack<string> st;
             st.push("N");
             int l = s.length();
             string res = "";
             string ns = "";
-            for(int i = 0; i <= l; i++) { 
+            for(int i = 0; i <= l; i++) { //loop
                 if ((isNumber(s[i])) || s[i] == '.') {
                     ns += s[i];
                     continue;
@@ -141,11 +117,11 @@ class Evaluator{
                         }
                         if (st.top() == "("){
                             st.pop();
+                            }
                         }
-                    }
                     else if (s[i] == '-' && (!isNumber(s[i-1]))){
-                        st.push("~");
-                        if (s[i+1] == '-'){
+                        st.push("~");                                                   //ALGORITMA PERUBAHAN INFIX MENJADI POSTFIX -> print semua bilangan langsung, operator di push ke stackdan di pop saat bertemu operator lain yg lebih rendah prionya
+                        if (s[i+1] == '-'){ //bilangan '--x' illegal
                             throw new DoubleNegativeError();
                         }
                     }
@@ -183,7 +159,7 @@ class Evaluator{
         }
         int checkPrio(string c){
             if (c=="^") return 4;
-            else if (isUnary(c)) return 3;
+            else if (isUnary(c)) return 3;              //INI SEMUA METHOD PEMBANTU
             else if (c == "*" || c == "/") return 2;
             else if(c == "+" || c == "-") return 1;
             else return -1;
@@ -198,23 +174,23 @@ class Evaluator{
             return c == "_" || c =="$" || c=="#" || c=="@" || c=="~";
         }  
 
-        bool legal(char c){
-            string s = "abcdefghijklmnopqrstuvwxyz!&%`'|}{[]:;?<>,ABCDEFGHIJKLMNOQPRSTUVWXYZ";
-            for(int i = 0 ; i < s.length() ; i ++){
-                if (c == s[i]) return false;
-            }
-            return true;
-        }
+        // bool legal(char c){
+        //     string s = "abcdefghijklmnopqrstuvwxyz!&%`'|}{[]:;?<>,ABCDEFGHIJKLMNOQPRSTUVWXYZ";
+        //     for(int i = 0 ; i < s.length() ; i ++){
+        //         if (c == s[i]) return false;
+        //     }
+        //     return true;
+        // }
 
-        void checkLegal(string s){
-            int left=0,right=0;
-            for (int i = 0; i < s.length(); i ++){
-                if (!legal(s[i])) throw new IllegalExpressionMemberException();
-                if (s[i] == '(') left++;
-                if (s[i] == ')') right++;
-            }
-            if (left != right) throw new UnbalanceBracketException();
-        }
+        // void checkLegal(string s){
+        //     int left=0,right=0;
+        //     for (int i = 0; i < s.length(); i ++){
+        //         if (!legal(s[i])) throw new IllegalExpressionMemberException();
+        //         if (s[i] == '(') left++;
+        //         if (s[i] == ')') right++;
+        //     }
+        //     if (left != right) throw new UnbalanceBracketException();
+        // }
 
         
 };

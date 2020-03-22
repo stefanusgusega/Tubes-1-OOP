@@ -11,7 +11,7 @@ class BinaryExpression : public Expression<T> {
 
 	public:
 		BinaryExpression(Expression<T>* x1, Expression<U>* x2) {
-			this->x1 = x1;
+			this->x1 = x1;	//Ekspresi dasar untuk operasi 2 operand, dimana tiap ekspresi biner mengoperasikan 2 operand bertipe ekspresi lain
 			this->x2 = x2;
 		}
 
@@ -33,7 +33,7 @@ class AddExpression : public BinaryExpression<T, U> {
 			// do nothing
 		}
 
-		T solve() {
+		T solve() {			//ekspresi tambah
 			return this->x1->solve() + this->x2->solve();
 		}
 };
@@ -45,7 +45,7 @@ class SubstractExpression : public BinaryExpression<T, U> {
 			// do nothing
 		}
 
-		T solve() {
+		T solve() {		//ekspresi kurang
 			return this->x1->solve() - this->x2->solve();
 		}
 };
@@ -57,7 +57,7 @@ class MultiplyExpression : public BinaryExpression<T, U> {
 			// do nothing
 		}
 
-		T solve() {
+		T solve() {	//ekspresi kali
 			return this->x1->solve() * this->x2->solve();
 		}
 };
@@ -69,10 +69,9 @@ class DivideExpression : public BinaryExpression<T, U> {
 			// do nothing
 		}
 
-		T solve() {
-			if (this->x2->solve() == 0) {
-				// throw "Something"; // Ganti dengan Exception
-				throw new DivisionByZeroError;
+		T solve() {	//ekspresi pembagian
+			if (this->x2->solve() == 0) {	//pembagian dengan 0 = error
+				throw new DivisionByZeroError();
 			}
 			else {
 				return this->x1->solve() / this->x2->solve();
