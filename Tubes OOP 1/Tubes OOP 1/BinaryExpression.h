@@ -2,7 +2,7 @@
 
 #include "Expression.h"
 #include "ErrorHandling.h"
-// Mengimplementasikan 
+// Mengimplementasikan ekspresi biner, yaitu ekspresi yang melibatkan dua angka
 template<class T, class U>
 class BinaryExpression : public Expression<T> {
 	protected:
@@ -25,7 +25,7 @@ class BinaryExpression : public Expression<T> {
 
 		virtual T solve() = 0;
 };
-
+// Penjumlahan antara dua ekspresi
 template<class T, class U>
 class AddExpression : public BinaryExpression<T, U> {
 	public:
@@ -33,11 +33,11 @@ class AddExpression : public BinaryExpression<T, U> {
 			// do nothing
 		}
 
-		T solve() {			//ekspresi tambah
+		T solve() {			// Solve ekspresi tambah
 			return this->x1->solve() + this->x2->solve();
 		}
 };
-
+// Pengurangan antara dua ekspresi
 template<class T, class U>
 class SubstractExpression : public BinaryExpression<T, U> {
 	public:
@@ -45,11 +45,11 @@ class SubstractExpression : public BinaryExpression<T, U> {
 			// do nothing
 		}
 
-		T solve() {		//ekspresi kurang
+		T solve() {		// Solve ekspresi kurang
 			return this->x1->solve() - this->x2->solve();
 		}
 };
-
+// Perkalian antara dua ekspresi
 template<class T, class U>
 class MultiplyExpression : public BinaryExpression<T, U> {
 	public:
@@ -57,11 +57,11 @@ class MultiplyExpression : public BinaryExpression<T, U> {
 			// do nothing
 		}
 
-		T solve() {	//ekspresi kali
+		T solve() {	//Solve ekspresi kali
 			return this->x1->solve() * this->x2->solve();
 		}
 };
-
+// Pembagian antara dua ekspresi
 template<class T, class U>
 class DivideExpression : public BinaryExpression<T, U> {
 	public:
@@ -69,7 +69,7 @@ class DivideExpression : public BinaryExpression<T, U> {
 			// do nothing
 		}
 
-		T solve() {	//ekspresi pembagian
+		T solve() {	// Solve ekspresi pembagian, jika bentuknya dibagi dengan 0, maka akan keluar error
 			if (this->x2->solve() == 0) {	//pembagian dengan 0 = error
 				throw new DivisionByZeroError();
 			}

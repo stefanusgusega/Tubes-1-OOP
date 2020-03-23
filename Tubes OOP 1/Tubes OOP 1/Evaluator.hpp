@@ -5,7 +5,7 @@ using namespace std;
 #include "BinaryExpression.h"
 #include <stack>
 
-
+// Kelas Evaluator guna menghitung semua ekspresi yang dimasukkan dengan mengubah string menjadi ekspresi
 template<class T,class U>
 class Evaluator{
     private:
@@ -62,7 +62,7 @@ class Evaluator{
                         else if (s2[i] == '^'){
                             st.push(new MultiplyExpression<T,U>(val1,new TerminalExpression<T>(pow(val1->solve(),val2->solve()-1))));
                         }
-                    }else
+                    }else{
                         Expression<T>* val1 = st.top();st.pop();
                         if (s2[i] == '_') st.push(new SquareRootExpression<T>(val1));
                         else if (s2[i] == '$') st.push(new SineExpression<T>(val1));
