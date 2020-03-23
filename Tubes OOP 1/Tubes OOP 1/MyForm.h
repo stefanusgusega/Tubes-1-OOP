@@ -8,7 +8,7 @@
 #include <msclr/marshal_cppstd.h>
 #include <sstream>
 
-double Ans = 0;
+double Ans = NULL;
 bool flag = false; // Flag untuk mengecek apakah tombol = ditekan
 bool flagmr = false; // Flag untuk mengecek apakah tombol mr ditekan
 string ekspresi = "";
@@ -520,21 +520,22 @@ namespace TubesOOP1 {
 		private: System::Void Button_Clear_Click(System::Object^ sender, System::EventArgs^ e) {
 			Layar_Hasil->Text = "";
 			ekspresi = "";
+			Ans = NULL;
 			Hist->clear();
 		}
 
 		private: System::Void Button_Ans_Click(System::Object^ sender, System::EventArgs^ e) {
-			if (Layar_Hasil->Text->Contains("ERROR") || flag) {
-				Layar_Hasil->Text = "Ans";
-				flag = false;
-			}
-			else {
-				Layar_Hasil->Text = Layar_Hasil->Text + "Ans";
-			}
-			ostringstream strs;
-			strs << Ans;
-			string temp = strs.str();
-			ekspresi = ekspresi + temp;
+				if (Layar_Hasil->Text->Contains("ERROR") || flag) {
+					Layar_Hasil->Text = "Ans";
+					flag = false;
+				}
+				else {
+					Layar_Hasil->Text = Layar_Hasil->Text + "Ans";
+				}
+				ostringstream strs;
+				strs << Ans;
+				string temp = strs.str();
+				ekspresi = ekspresi + temp;
 		}
 
 			   // BUTTON UNTUK OPERASI ARITMATIKA
